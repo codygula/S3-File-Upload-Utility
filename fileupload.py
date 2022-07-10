@@ -5,7 +5,7 @@ import sys, os
 from PIL import Image
 import boto3
 import uuid
-
+from mainGui import Ui_MainWindow
 
 s3 = boto3.resource("s3")
 s3Bucket = "newtestbucket25324dhfghgfhd8gds0"
@@ -21,22 +21,21 @@ class Ui(QMainWindow):
         self.pushButton_2.clicked.connect(self.openFiles)
         self.pushButton.clicked.connect(self.upload)
         self.pushButton_3.clicked.connect(app.exit)
+        self.Clear_All.clicked.connect(self.clearFiles)
+        self.Delete_Selected.clicked.connect(self.clearSelectedFiles)
         
-            
-        
-
     def openFiles(self):
+      
         file , check = QFileDialog.getOpenFileNames(None, "QFileDialog.getOpenFileName()",
-                                               "", "All Files (*);;Python Files (*.py);;Text Files (*.txt)")
+                                            "", "All Files (*);;Python Files (*.py);;Text Files (*.txt)")
         if check:
             print("Selected Files: " + str(file))
-            
-            #files = []
             print(type(file))
             print(type(self.files))
             
             for i in file:
                 self.files.append(i)
+
         self.showFiles(self.files)
 
     def showFiles(self, files):
@@ -55,6 +54,17 @@ class Ui(QMainWindow):
                 Key= i
                 )
             print(response)
+    
+    def clearFiles(self):
+       self.listWidget.clear()
+       
+    def clearSelectedFiles(self):
+        listItems = self.listWidget.selectedItems()
+        print(listItems)
+        print(type(listItems))
+               
+        for i in listItems:
+            self.listWidget.takeItem(self.listWidget.row(i))
 
 app = QApplication(sys.argv) # Create an instance of QtWidgets.QApplication
 window = Ui() # Create an instance of our class
