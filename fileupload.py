@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel, QMainWindow, QFileDialog
+from PyQt5.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel, QMainWindow, QFileDialog, QListWidgetItem
 from PyQt5 import QtGui, uic
 from PyQt5.QtGui import QPixmap
 import sys, os
@@ -20,6 +20,9 @@ class Ui(QMainWindow):
         self.show() # Show the GUI
         self.pushButton_2.clicked.connect(self.openFiles)
         self.pushButton.clicked.connect(self.upload)
+        self.pushButton_3.clicked.connect(app.exit)
+        
+            
         
 
     def openFiles(self):
@@ -34,9 +37,14 @@ class Ui(QMainWindow):
             
             for i in file:
                 self.files.append(i)
-            
+        self.showFiles(self.files)
 
-            print("The selected files are ", self.files)
+    def showFiles(self, files):
+            for i in files:
+                listWidgetItem = QListWidgetItem(i)
+                self.listWidget.addItem(listWidgetItem)
+           
+            print("Displaying Files")
 
     def upload(self):
         upload_files = self.files
