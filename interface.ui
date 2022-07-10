@@ -23,7 +23,7 @@
      </widget>
     </item>
     <item row="3" column="0">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="StatusLabel">
       <property name="text">
        <string>TextLabel</string>
       </property>
@@ -61,9 +61,9 @@
      </widget>
     </item>
     <item row="2" column="2">
-     <widget class="QPushButton" name="pushButton_6">
+     <widget class="QPushButton" name="OptionsButton">
       <property name="text">
-       <string/>
+       <string>Options</string>
       </property>
      </widget>
     </item>

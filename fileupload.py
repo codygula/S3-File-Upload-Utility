@@ -66,6 +66,11 @@ class Ui(QMainWindow):
         for i in listItems:
             self.listWidget.takeItem(self.listWidget.row(i))
 
+# TODO Add options section to select S3 bucket, choose destination file names/paths, etc.
+
+# TODO Add status indicators to StatusLabel 
+
+
 app = QApplication(sys.argv) # Create an instance of QtWidgets.QApplication
 window = Ui() # Create an instance of our class
 app.exec_() # Start the application
