@@ -35,6 +35,7 @@ class Ui(QMainWindow):
             
             for i in file:
                 self.files.append(i)
+                self.StatusLabel.setText("Ready for upload")
 
         self.showFiles(self.files)
 
@@ -48,15 +49,22 @@ class Ui(QMainWindow):
     def upload(self):
         upload_files = self.files
         for i in upload_files:
+            self.StatusLabel.setText(f"Uploading {i}")
             response = s3.meta.client.put_object(
                 Bucket="newtestbucket25324dhfghgfhd8gds0", 
                 Body= i, 
                 Key= i
                 )
+            
             print(response)
+        self.StatusLabel.setText(f"Done")
+        self.listWidget.clear()
+        self.files = []
     
     def clearFiles(self):
        self.listWidget.clear()
+       self.files = []
+       self.StatusLabel.setText("Files Cleared")
        
     def clearSelectedFiles(self):
         listItems = self.listWidget.selectedItems()
@@ -65,6 +73,12 @@ class Ui(QMainWindow):
                
         for i in listItems:
             self.listWidget.takeItem(self.listWidget.row(i))
+            print(type(i))
+            print(type(listItems[i]))
+            print(listItems[i])
+
+            #THIS DOES NOT WORK!!!!!
+            self.files.remove(listItems[i])
 
 # TODO Add options section to select S3 bucket, choose destination file names/paths, etc.
 
