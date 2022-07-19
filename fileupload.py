@@ -38,6 +38,7 @@ class Ui(QMainWindow):
                 self.StatusLabel.setText("Ready for upload")
 
         self.showFiles(self.files)
+        self.files = []
 
     def showFiles(self, files):
             for i in files:
@@ -69,16 +70,23 @@ class Ui(QMainWindow):
     def clearSelectedFiles(self):
         listItems = self.listWidget.selectedItems()
         print(listItems)
-        print(type(listItems))
-               
-        for i in listItems:
-            self.listWidget.takeItem(self.listWidget.row(i))
-            print(type(i))
-            print(type(listItems[i]))
-            print(listItems[i])
+        print("type listItems = " + str(type(listItems)))
 
-            #THIS DOES NOT WORK!!!!!
-            self.files.remove(listItems[i])
+
+        #This still does not work       
+        for i in listItems:
+            if listItems[i] in self.files:
+                self.files.pop(i)
+
+            # self.listWidget.takeItem(self.listWidget.row(listItems[i + 1]))
+            print("Type i = ", type(i))
+            print("type listItems = ", type(listItems[i]))
+            print(listItems[i])
+           
+
+
+
+
 
 # TODO Add options section to select S3 bucket, choose destination file names/paths, etc.
 
